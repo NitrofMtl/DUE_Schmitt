@@ -74,13 +74,13 @@ void Schmitt::debouncePeriodSet(uint8_t pin, uint16_t DIV) {
 	port->PIO_SCDR = DIV;
 }
 
-void Schmitt::pioDebouncePeriod() {
-	Serial.println("Debounce period is for each PIO port : ");
-	Serial.print("PIOA: "); Serial.print(debouncePeriodGet(PIOA),2);Serial.println("ms");
-	Serial.print("PIOB: "); Serial.print(debouncePeriodGet(PIOB),2); Serial.println("ms");
-	Serial.print("PIOC: "); Serial.print(debouncePeriodGet(PIOC),2); Serial.println("ms");
-	Serial.print("PIOD: "); Serial.print(debouncePeriodGet(PIOD),2); Serial.println("ms");
-	Serial.println();
+void Schmitt::pioDebouncePeriod(HardwareSerial& stream) {
+	stream.println("Debounce period is for each PIO port : ");
+	stream.print("PIOA: "); stream.print(debouncePeriodGet(PIOA),2); stream.println("ms");
+	stream.print("PIOB: "); stream.print(debouncePeriodGet(PIOB),2); stream.println("ms");
+	stream.print("PIOC: "); stream.print(debouncePeriodGet(PIOC),2); stream.println("ms");
+	stream.print("PIOD: "); stream.print(debouncePeriodGet(PIOD),2); stream.println("ms");
+	stream.println();
 }
 
 

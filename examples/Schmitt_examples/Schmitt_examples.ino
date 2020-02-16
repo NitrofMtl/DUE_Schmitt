@@ -15,9 +15,10 @@ void setup() {
 	Schmitt::disable(52);
 
 	// Debounce period is fo each port once, could set it directly or by passing a pin member of this port
+	// (port or pin, value)
 	Schmitt::debouncePeriodSet(PIOB, 4096); //set with port
 	Schmitt::debouncePeriodSet(48, 8191); //max //set with pin
-	Schmitt::pioDebouncePeriod();
+	Schmitt::pioDebouncePeriod(Serial);
 }
 
 

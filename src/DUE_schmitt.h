@@ -29,7 +29,7 @@ public:
 	static void disable(uint8_t pin);
 	static void debouncePeriodSet(Pio * port, uint16_t DIV);
 	static void debouncePeriodSet(uint8_t pin, uint16_t DIV);
-	static void pioDebouncePeriod();
+	static void pioDebouncePeriod(HardwareSerial& stream);
 private:
 	static bool validatePin(Pio *port, uint32_t pinMask);
 	static float debouncePeriodGet(Pio *port);
