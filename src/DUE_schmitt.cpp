@@ -31,7 +31,7 @@ PIO can't have both glitch and deonce enable at the same time:
 */
 
 
-void Schmitt::debounceEnable(uint8_t pin) {
+void Schmitt_class::debounceEnable(uint8_t pin) {
 	Pio *port = digitalPinToPort(pin);
 	uint32_t pinMask = digitalPinToBitMask(pin);
 	//Discard pin that are not schmmitt capable
@@ -42,7 +42,7 @@ void Schmitt::debounceEnable(uint8_t pin) {
 }
 
 
-void Schmitt::glitchEnable(uint8_t pin) {
+void Schmitt_class::glitchEnable(uint8_t pin) {
 	Pio *port = digitalPinToPort(pin);
 	uint32_t pinMask = digitalPinToBitMask(pin);
 	//Discard pin that are not schmmitt capable
@@ -53,7 +53,7 @@ void Schmitt::glitchEnable(uint8_t pin) {
 }
 
 
-void Schmitt::disable(uint8_t pin) {
+void Schmitt_class::disable(uint8_t pin) {
 	Pio *port = digitalPinToPort(pin);
 	uint32_t pinMask = digitalPinToBitMask(pin);
 	//Discard pin that are not schmmitt capable
@@ -64,17 +64,17 @@ void Schmitt::disable(uint8_t pin) {
 }
 
 
-void Schmitt::debouncePeriodSet(Pio * port, uint16_t DIV) {
+void Schmitt_class::debouncePeriodSet(Pio * port, uint16_t DIV) {
 	port->PIO_SCDR = DIV;
 }
 
 
-void Schmitt::debouncePeriodSet(uint8_t pin, uint16_t DIV) {
+void Schmitt_class::debouncePeriodSet(uint8_t pin, uint16_t DIV) {
 	Pio *port = digitalPinToPort(pin);
 	port->PIO_SCDR = DIV;
 }
 
-void Schmitt::pioDebouncePeriod(HardwareSerial& stream) {
+void Schmitt_class::pioDebouncePeriod(HardwareSerial& stream) {
 	stream.println("Debounce period is for each PIO port : ");
 	stream.print("PIOA: "); stream.print(debouncePeriodGet(PIOA),2); stream.println("ms");
 	stream.print("PIOB: "); stream.print(debouncePeriodGet(PIOB),2); stream.println("ms");
@@ -84,7 +84,7 @@ void Schmitt::pioDebouncePeriod(HardwareSerial& stream) {
 }
 
 
-bool Schmitt::validatePin(Pio *port, uint32_t pinMask) { //Discard pin that are not schmmitt capable
+bool Schmitt_class::validatePin(Pio *port, uint32_t pinMask) { //Discard pin that are not schmmitt capable
 	if ( (port == PIOA) && (pinMask & PIOA_DISCARD_MASK) ) return false;
 	if ( (port == PIOB) && (pinMask & PIOB_DISCARD_MASK) ) return false;
 	if ( (port == PIOC) && (pinMask & PIOC_DISCARD_MASK) ) return false;
@@ -93,8 +93,10 @@ bool Schmitt::validatePin(Pio *port, uint32_t pinMask) { //Discard pin that are 
 }
 
 
-float Schmitt::debouncePeriodGet(Pio *port) {
+float Schmitt_class::debouncePeriodGet(Pio *port) {
 	return TSLOW_CLOCK_PERIOD * ( port->PIO_SCDR +1 ) * 2;
 }
+
+Schmitt_class Schmitt;
 
 

@@ -22,7 +22,7 @@
 #define PIOC_DISCARD_MASK (BIT(2) | BIT(9) | BIT(15) | BIT(24))
 #define PIOD_DISCARD_MASK (BIT(10) | BIT(30))
 
-class Schmitt {
+class Schmitt_class {
 public:
 	static void debounceEnable(uint8_t pin);
 	static void glitchEnable(uint8_t pin);
@@ -34,6 +34,8 @@ private:
 	static bool validatePin(Pio *port, uint32_t pinMask);
 	static float debouncePeriodGet(Pio *port);
 };
+
+extern Schmitt_class Schmitt;
 
 
 #endif

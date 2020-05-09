@@ -16,7 +16,7 @@ Here all DUE's pins Schmitt filter capable:
 - digital: 4 ( on port C.26 )
 - digital: 10 ( on port A.28 )
 - digital: 22 to 31
--  digital 33 to 40
+- digital 33 to 40
 - digital 42, 43, 45, 46, 47, 49, 50, 51, 52
 
 ### Usage
@@ -30,25 +30,25 @@ Here all DUE's pins Schmitt filter capable:
 - add pin you want to debounce or de-glitch
 ````
 	// ( pin )
-	Schmitt::debounceEnable(22); ///PIOB[26]
-	Schmitt::glitchEnable(52); //PIOB[21]
+	Schmitt.debounceEnable(22); ///PIOB[26]
+	Schmitt.glitchEnable(52); //PIOB[21]
 ````
 
 - For debounce, select the debounce value needed, input if 0 to 8191, that make debonce time to 0,61 to 500ms.
 ````
 	// Debounce period is fo each port once, could set it directly or by passing a pin member of this port
 	// (port or pin, value)
-	Schmitt::debouncePeriodSet(PIOB, 4096); //set with port
-	Schmitt::debouncePeriodSet(48, 8191); //max //set with pin
+	Schmitt.debouncePeriodSet(PIOB, 4096); //set with port
+	Schmitt.debouncePeriodSet(48, 8191); //max //set with pin
 ````
 
 - To validate your config, you can print to serial the debounce time of all port.
 ````
-Schmitt::pioDebouncePeriod(Serial);
+Schmitt.pioDebouncePeriod(Serial);
 ````
 
 - To desale a glitch of a debounce pin.
 ````
 	// ( pin )
-	Schmitt::disable(22);
+	Schmitt.disable(22);
 ````
