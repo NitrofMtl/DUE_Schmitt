@@ -1,3 +1,5 @@
+library.properties
+examples
 # DUE_Schmitt
 ## Use Arduino DUE internal digital pin Schmitt trigguer.
 
@@ -34,7 +36,7 @@ Here all DUE's pins Schmitt filter capable:
 	Schmitt.glitchEnable(52); //PIOB[21]
 ````
 
-- For debounce, select the debounce value needed, input if 0 to 8191, that make debonce time to 0,61 to 500ms.
+- For debounce, select the debounce value needed, input if 0 to 8191, that make debonce time to 0,061 to 1000ms.
 ````
 	// Debounce period is fo each port once, could set it directly or by passing a pin member of this port
 	// (port or pin, value)
@@ -52,3 +54,24 @@ Schmitt.pioDebouncePeriod(Serial);
 	// ( pin )
 	Schmitt.disable(22);
 ````
+
+
+## New in version 2.0
+
+- Pre-instanciated class object [Schmitt]
+
+- Add Variadic function: debounceEnable(), glitchEnable(), and disable().
+
+````
+	Schmitt.debounceEnable(22, 45, 46);
+	Schmitt.glitchEnable(52, 50, 51);
+	Schmitt.disable(22, 45, 46, 50, 51, 52);
+````
+
+- Change API function for reference to nest call.
+````	
+Schmitt.debounceEnable(22).glitchEnable(52).debouncePeriodSet(PIOB, 4096);
+````
+
+- Add Discard "reserve by DUE board" pins like JTAG to API function
+
