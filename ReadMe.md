@@ -36,12 +36,13 @@ Here all DUE's pins Schmitt filter capable:
 	Schmitt.glitchEnable(52); //PIOB[21]
 ````
 
-- For debounce, select the debounce value needed, input if 0 to 8191, that make debonce time to 0,061 to 1000ms.
+- For debounce, select the debounce value needed in ms, that make debonce time to 0,061 to 1000ms.
+Timing is applied for the entire PIO port
 ````
 	// Debounce period is fo each port once, could set it directly or by passing a pin member of this port
 	// (port or pin, value)
-	Schmitt.debouncePeriodSet(PIOB, 4096); //set with port
-	Schmitt.debouncePeriodSet(48, 8191); //max //set with pin
+	Schmitt.debouncePeriodSet(PIOB, 200); //set with port
+	Schmitt.debouncePeriodSet(48, 500); //max //set with pin
 ````
 
 - To validate your config, you can print to serial the debounce time of all port.

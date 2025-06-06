@@ -64,15 +64,18 @@ Schmitt_Class& Schmitt_Class::disable(uint8_t pin) {
 }
 
 
-Schmitt_Class& Schmitt_Class::debouncePeriodSet(Pio * port, uint16_t DIV) {
+Schmitt_Class& Schmitt_Class::debouncePeriodSet(Pio * port, uint16_t DebounceTime) {
+	if (DebounceTime == 0) DebounceTime++;
+	uint16_t DIV = (DebounceTime / (TSLOW_CLOCK_PERIOD*2)) -1;
+	DIV &= PIO_SCDR_MASK;
 	port->PIO_SCDR = DIV;
 	return *this;
 }
 
 
-Schmitt_Class& Schmitt_Class::debouncePeriodSet(uint8_t pin, uint16_t DIV) {
+Schmitt_Class& Schmitt_Class::debouncePeriodSet(uint8_t pin, uint16_t DebounceTime) {
 	Pio *port = digitalPinToPort(pin);
-	port->PIO_SCDR = DIV;
+	debouncePeriodSet(port, DebounceTime);
 	return *this;
 }
 

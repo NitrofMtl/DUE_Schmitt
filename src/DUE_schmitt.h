@@ -7,12 +7,10 @@
   	#error "This libraries is for arduino DUE only !!!"
 #else
 
-#ifndef MAX_FIELD
-#define MAX_FIELD (uint32_t)-1
-#endif
 
-#define Tslow_clock 32768
+//#define Tslow_clock 32768
 #define TSLOW_CLOCK_PERIOD 0.030517578125f  // Tslow_clock period in ms ->> 1000/32768
+#define PIO_SCDR_MASK 0x3FFF
 
 #define SCHMITT_NON_CAPABLE_PIOA30 30
 #define SCHMITT_NON_CAPABLE_PIOA31 31
@@ -23,8 +21,6 @@
 #define SCHMITT_JTAG_RESERVE_PIOB29 29
 #define SCHMITT_JTAG_RESERVE_PIOB30 30
 #define SCHMITT_JTAG_RESERVE_PIOB31 31
-
-#define SCHMITT_MAX_DEBOUNCE 0x3fff
 
 
 //GPIO that not support filter
@@ -48,8 +44,8 @@ public:
 	Schmitt_Class& disable(uint8_t pin);
 	template<typename ...Pin>
 	Schmitt_Class& disable(uint8_t pin, Pin... pinx) { disable(pin); disable(pinx...); return *this; }
-	Schmitt_Class& debouncePeriodSet(Pio * port, uint16_t DIV);
-	Schmitt_Class& debouncePeriodSet(uint8_t pin, uint16_t DIV);
+	Schmitt_Class& debouncePeriodSet(Pio * port, uint16_t DebounceTime);
+	Schmitt_Class& debouncePeriodSet(uint8_t pin, uint16_t DebounceTime);
 	Schmitt_Class& pioDebouncePeriod();
 	float debouncePeriodGet(Pio *port);
 private:
